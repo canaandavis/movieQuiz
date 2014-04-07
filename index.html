@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+	<title>Document</title>
+</head>
+<body>
+	<div class="container">
+		<div class="instructions">
+			<span>WELCOM TO THE TOTALLY RAD MOVIE QUIZ</span><br>
+			the quiz consist of 5 rounds<br>
+			each round will play a short audio clip from a movie <br>
+			it is your job to guess which movie this clip is from<br>
+			by clicking the correct movie poster<br>
+			you can use the audio controls to replay the clip if needed<br>
+			<button>Lets do it!</button>
+		</div>
+		<div class="answer">
+			<div class="answer_head">Correct!</div>
+			<div class="movie_info">
+				<div class="poster"><img src="images/shining.jpg"></div>
+				<div class="description">
+					The Shining is a 1980 British-American psychological horror film produced and directed by Stanley Kubrick, co-written with novelist Diane Johnson, and starring Jack Nicholson, Shelley Duvall, Danny Lloyd, and Scatman Crothers. The film is based on Stephen King's novel of the same name, though there are significant changes.<br><br>
+
+					In the film, Jack Torrance, a writer and recovering alcoholic, takes a job as an off-season caretaker at an isolated hotel called the Overlook Hotel. His young son possesses psychic abilities and is able to see things from the past and future, such as the ghosts who inhabit the hotel. Soon after settling in, the family is trapped in the hotel by a snowstorm, and Jack gradually becomes influenced by a supernatural presence; he descends into madness and attempts to murder his wife and son.
+				</div>
+			</div>
+			<button>Next Question</button>
+		</div>
+		<header>
+			<div class="logo">
+				<!-- <div class="logo_small"></div> -->
+				THE<span> totally rad </span>MOVIE QUIZ
+			</div>
+			<div class="progress">
+					<div class="progress_indicator progress_correct" id="progress_5"></div>
+					<div class="progress_indicator" id="progress_4"></div>
+					<div class="progress_indicator" id="progress_3"></div>
+					<div class="progress_indicator" id="progress_2"></div>
+					<div class="progress_indicator progress_incorrect" id="progress_1"></div>
+			</div>
+			<!-- <div class="audio_controls">replay clip</div> -->
+		</header>
+		<div class="audio_controls">Audio: <span id='play'>Play</span> | <span id='stop'>Stop</span></div>
+		<div class="choices_container">
+			<div class="choice" id="choice_1"><img src="images/shining.jpg"></div>
+			<div class="choice" id="choice_2"><img src="images/alien.jpg"></div>
+			<div class="choice" id="choice_3"><img src="images/halloween.jpg"></div>
+			<div class="choice" id="choice_4"><img src="images/nightmare.jpg"></div>
+		</div>
+		<div class="info">
+		Presented by: CANAAN DAVIS<br>
+		For help with the game | CLICK HERE.<br>
+		To start a new game | CLICK HERE.
+	</div>
+	</div>
+	
+	
+</body>
+</html>

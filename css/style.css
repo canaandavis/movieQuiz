@@ -1,0 +1,227 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+html {
+	
+}
+body {
+	/*background-color: rgba(255, 255, 255, 1.0000);*/
+	background-image: url("../images/Elegant_Background-10.jpg");
+}
+
+.container {
+	/*background-color: rgba(255, 255, 255, .3000);*/
+	background-color: rgba(29, 31, 33, .6000);
+	height: 750px;
+	width: 1050px;
+	margin: 20px auto;
+	border-radius: 10px;
+	text-align: center;
+	color: white;
+	position: relative;
+}
+
+/*Instructions Overlay*/
+.instructions {
+	background-color: rgba(165, 31, 23, .7000);
+	height: 750px;
+	width: 1050px;
+	position: absolute;
+	border-radius: 10px;
+	font-family: 'Oswald', sans-serif;
+	font-size: 35px;
+	padding-top: 175px;
+	display: none;
+}
+
+
+.instructions span {
+	font-size: 60px;
+}
+
+.instructions button {
+	border: none;
+	height: 40px;
+	width: 90px;
+	font-family: 'Oswald', sans-serif;
+	font-size: 18px;
+	color: white;
+	background-color: rgba(245, 151, 138, .7000);
+}
+
+.instructions button:hover {
+	background-color: rgba(245, 151, 138, 1.000);
+}
+
+.instructions button:focus {
+	outline: none;
+}
+
+/* Answer Overlay */
+.answer {
+	position: absolute;
+	height: 600px;
+	width: 800px;
+	left: 126px;
+	top: 70px;
+	background-color: rgba(255, 255, 255, .95);
+	border: 7px solid #000;
+	color: black;
+	display: none;
+}
+
+.answer_head {
+	font-size: 100px;
+	font-family: 'Oswald', sans-serif;
+	width: 580px;
+	margin: auto;
+	border-bottom: 1px solid black;
+}
+
+.movie_info {
+	margin-top: 15px;
+	margin-left: 50px
+}
+
+.poster {
+	float: left;
+	padding-right: 10px;
+	/*border-right: 1px solid black;*/
+}
+
+.description {
+	margin-right: 50px;
+	float: right;
+	text-align: left;
+	width: 420px;
+	font-family: 'Merriweather', serif;
+	font-size: 15px;
+}
+
+.answer button {
+	border: none;
+	color: white;
+	font-size: 18px;
+	background-color: rgba(165, 31, 23, .80000);
+	float: right;
+	margin-right: 60px;
+	margin-top: 30px;
+}
+
+.answer button:hover {
+	background-color: rgba(165, 31, 23, 1.0000);
+}
+
+.answer button:focus {
+	outline: none;
+}
+
+/* Header Setup */
+
+header, .logo {
+	height: 180px;
+}
+
+header {
+	float: left;
+	width: 100%;
+	padding-right: 25px;
+}
+
+/*Logo*/
+.logo {
+	width: 100%;
+	height: 70px;
+	/*border: 1px solid yellow;*/
+	margin: auto;
+	text-align: right;
+	font-size: 30px;
+	font-family: 'Oswald', sans-serif;
+	font-size: 110px;
+	color: black;
+	float: left;
+	color: white;
+}
+
+.logo span {
+	font-size: 30px;
+	color: #a51f17;
+}
+
+.logo_small {
+}
+
+/*Progress Bar*/
+
+.progress {
+	height: 50px;
+	width: 100%;
+	float: left;
+	margin-top: 80px;
+}
+
+.progress_indicator {
+	border-radius: 100%;
+	height: 55px;
+	width: 55px;
+	/*background-color: #97d5cc;*/
+	float: right;
+	margin-left: 40px;
+	border: 1px dashed #a51f17;
+}
+
+.progress_correct {
+	background-color: #a51f17;
+	border: none;
+}
+
+.progress_incorrect {
+	border: 2px solid #a51f17;
+}
+
+/*Audio Controls*/
+.audio_controls {
+	height: 40px;
+	width: 100%;
+	float: left;
+	margin-top: 40px;
+	text-align: right;
+	font-family: 'Oswald', sans-serif;
+	font-size: 22px;
+	padding-right: 25px;
+	color: white;
+}
+
+/*Quiz Choices*/
+.choices_container {
+	width: 100%;
+	float: left;
+	text-align: center;
+	margin-top: 20px;
+}
+.choice {
+	height: 350px;
+	width: 250px;
+	margin-top: 20px;
+	margin: auto;
+	display: inline-block;
+}
+
+img {
+	height: 350px;
+	width: 250px;
+}
+
+img:hover {
+	opacity: .8;
+}
+
+/*About Info*/
+.info {
+	text-align: center;
+	margin: auto;
+	width: 400px;
+	color: white;
+	font-family: 'Old Standard TT', serif;
+}
