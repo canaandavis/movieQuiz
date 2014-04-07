@@ -52,6 +52,7 @@ function Question(audio, moviePosters, descriptionText) {
 
 Question.prototype.updateQuestion = function(){
 	$('.choices_container').append(this.moviePosters);
+	$(this.moviePosters).slideDown('5000');
 	// this.playAudio();
 }
 
@@ -98,12 +99,12 @@ function itemHover(){
 	console.log(clicked);
 	$('.choice').on('mouseenter', function(){
 		if (clicked === false) {
-			$(this).animate({opacity: 0.5}, 150);
+			$(this).animate({opacity: 0.5}, 250);
 		}
 	});
 	$('.choice').on('mouseleave', function(){
 		// if (clicked === false) {
-			$(this).animate({opacity: 1}, 1);
+			$(this).animate({opacity: 1}, 400);
 		// }
 	});
 }
