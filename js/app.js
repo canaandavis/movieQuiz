@@ -76,7 +76,7 @@ function instructionLoad(event){
 		event[count].updateQuestion();
 		itemHover();
 		itemClick(event);
-		$(this).closest('.instructions').slideUp(400);
+		$(this).closest('.instructions').slideUp(475);
 	});
 	
 }
@@ -249,7 +249,17 @@ var questionFourImages = questionFourImageOne + questionFourImageTwo + questionF
 
 var questionFourAudio = $('#questionFourAudio');
 
-var questionFourDescriptionText = ("");
+var questionFourDescriptionText = ("Scott Pilgrim (Michael Cera) is an unemployed 23-year-old bass guitarist \
+	in an up-and-coming garage rock band who is dating a cute 17-year-old high school girl, \
+	Knives Chau (Ellen Wong). He is having fun in life and rolling along at a nice even tempo \
+	until one day Ramona Flowers (Mary Elizabeth Winstead) roller-blades into his life. Ramona \
+	moved to Toronto from New York City to find peace and quiet and leave her past behind. \
+	No one knows what her past is, but Scott will find out very soon as he tries to make Ramona his \
+	new girlfriend.<br><br>\
+	Before Scott can begin dating Ramona, he must prove himself by defeating the league \
+	of her seven exes who controls her love life. They will do anything to get rid of and destroy any new \
+	boyfriend Ramona may consider. If Scott wants to find true love with Ramona, he must defeat all seven, \
+	before the game is over.");
 
 var questionFour = new Question(questionFourAudio, questionFourImages, questionFourDescriptionText);
 
@@ -263,6 +273,15 @@ var questionFiveImages = questionFiveImageOne + questionFiveImageTwo + questionF
 
 var questionFiveAudio = $('#questionFiveAudio');
 
-var questionFiveDescriptionText = ("");
+var questionFiveDescriptionText = ("Cameron Poe, who is a highly decorated United States Army Ranger came to his home of \
+	Alabama to his wife, Tricia. only to run into a few drunken regulars at where Tricia works. \
+	Cameron unknowingly kills one of the drunks and was sent to a federal penitentiary for \
+	involuntary manslaughter for seven years. Then, Cameron became eligible for parole and can now \
+	go home to his wife and daughter, Casey.<br><br> \
+	Unfortunately, Cameron has to share a prison airplane \
+	with some of the most dangerous criminals in the country, who somehow took control of the plane and \
+	are now planning to escape the country with the plane. Cameron has to find a way to stop them while \
+	playing along. Meanwhile, United States Marshal Vincent Larkin is trying to help Cameron get free and \
+	stop the criminals including, Cyrus 'The Virus' Grissom.");
 
 var questionFive = new Question(questionFiveAudio, questionFiveImages, questionFiveDescriptionText);
