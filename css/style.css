@@ -168,7 +168,7 @@ header {
 	/*background-color: #97d5cc;*/
 	float: right;
 	margin-left: 40px;
-	border: 1px dashed #a51f17;
+	border: 2px dashed #a51f17;
 }
 
 .progress_correct {
@@ -218,9 +218,9 @@ img {
 	width: 250px;
 }
 
-img:hover {
+/*img:hover {
 	opacity: .8;
-}
+}*/
 
 /*About Info*/
 .info {
