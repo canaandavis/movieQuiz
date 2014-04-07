@@ -3,8 +3,8 @@ $(document).ready(function(){
 
 	// Questions array
 	var questions = [questionOne, questionTwo, questionThree, questionFour, questionFive];
-	
-	questions[count].updateQuestion();
+
+	instructionLoad(questions);
 
 	$('#play').on('click', function(){
 		console.log('play click');
@@ -68,6 +68,19 @@ Question.prototype.stopAudio = function(){
 	this.audio[0].pause();
 }
 
+// Function to display instructions on page load
+
+function instructionLoad(event){
+	$('.instructions').show();
+	$('.instructions').find('button').on('click', function(){
+		event[count].updateQuestion();
+		itemHover();
+		itemClick(event);
+		$(this).closest('.instructions').slideUp(400);
+	});
+	
+}
+
 // Function to add abality to click items
 
 function itemClick(array) {
@@ -104,7 +117,7 @@ function itemHover(){
 	});
 	$('.choice').on('mouseleave', function(){
 		// if (clicked === false) {
-			$(this).animate({opacity: 1}, 400);
+			$(this).animate({opacity: 1}, 100);
 		// }
 	});
 }
@@ -136,6 +149,7 @@ function progressUpdate(event) {
 // Function to load next question
 
 function nextQuestion(event){
+	event[count].stopAudio();
 	count++;
 	clicked = false;
 	if (count > 4){

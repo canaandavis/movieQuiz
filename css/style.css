@@ -24,7 +24,7 @@ body {
 
 /*Instructions Overlay*/
 .instructions {
-	background-color: rgba(165, 31, 23, .7000);
+	background-color: rgba(29, 31, 33, .9500);
 	height: 750px;
 	width: 1050px;
 	position: absolute;
@@ -47,11 +47,11 @@ body {
 	font-family: 'Oswald', sans-serif;
 	font-size: 18px;
 	color: white;
-	background-color: rgba(245, 151, 138, .7000);
+	background-color: rgba(165, 31, 23, .7000);
 }
 
 .instructions button:hover {
-	background-color: rgba(245, 151, 138, 1.000);
+	background-color: rgba(165, 31, 23, 1.000);
 }
 
 .instructions button:focus {
