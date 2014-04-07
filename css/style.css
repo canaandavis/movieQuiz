@@ -193,6 +193,11 @@ header {
 	color: white;
 }
 
+.audio_controls a{
+	text-decoration: none;
+	color: white;
+}
+
 /*Quiz Choices*/
 .choices_container {
 	width: 100%;

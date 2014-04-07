@@ -5,20 +5,43 @@ $(document).ready(function(){
 	var questions = [questionOne];
 	
 	questions[count].updateQuestion();
+
+	$('#play').on('click', function(){
+		console.log('play click');
+		questions[count].playAudio();
+	});
+
+	$('#stop').on('click', function(){
+		console.log('stop click');
+		questions[count].stopAudio();
+	})
 	
 	$('.choice').on('click', function(){
 		console.log('Click working');
 	});
 });
 
-function Question(moviePosters) {
-	// this.audio = audio;
+function Question(audio, moviePosters) {
+	this.audio = audio;
 	this.moviePosters = moviePosters;
 	// this.descriptionText = descriptionText;
 }
 
 Question.prototype.updateQuestion = function(){
 	$('.choices_container').append(this.moviePosters);
+	// this.playAudio();
+}
+
+// Function to play / stop audio
+
+Question.prototype.playAudio= function(){
+	this.audio[0].volume = 0.5;
+	this.audio[0].load();
+	this.audio[0].play();
+}
+
+Question.prototype.stopAudio = function(){
+	this.audio[0].pause();
 }
 
 // Count variable for accessing array
@@ -32,4 +55,6 @@ var $questionOneImageThree = ("<div class='choice' id='choice_3'><img src='image
 var $questionOneImageFour = ("<div class='choice' id='choice_4'><img src='images/nightmare.jpg'></div>");
 var questionOneImages = $questionOneImageOne + $questionOneImageTwo + $questionOneImageThree + $questionOneImageFour;
 
-var questionOne = new Question(questionOneImages);
+var questionOneAudio = $('#questionOneAudio');
+
+var questionOne = new Question(questionOneAudio, questionOneImages);
