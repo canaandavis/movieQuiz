@@ -58,10 +58,10 @@ body {
 	outline: none;
 }
 
-/* Answer Overlay */
+/* Answer / Final Overlay */
 .answer {
 	position: absolute;
-	height: 600px;
+	min-height: 600px;
 	width: 800px;
 	left: 126px;
 	top: 70px;
@@ -99,21 +99,23 @@ body {
 	font-size: 15px;
 }
 
-.answer button {
+.answer button{
 	border: none;
 	color: white;
 	font-size: 18px;
 	background-color: rgba(165, 31, 23, .80000);
 	float: right;
 	margin-right: 60px;
-	margin-top: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	clear: both;
 }
 
-.answer button:hover {
+.answer button:hover{
 	background-color: rgba(165, 31, 23, 1.0000);
 }
 
-.answer button:focus {
+.answer button:focus{
 	outline: none;
 }
 
@@ -178,6 +180,7 @@ header {
 
 .progress_incorrect {
 	border: 2px solid #a51f17;
+	background-color: rgba(29, 31, 33, .3900);
 }
 
 /*Audio Controls*/
