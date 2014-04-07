@@ -19,9 +19,11 @@ $(document).ready(function(){
 	$('.answer').find('button').on('click', function(){
 		nextQuestion(questions);
 		itemClick(questions);
+		itemHover();
 	});
 
 	itemClick(questions);
+	itemHover();
 
 });
 
@@ -71,6 +73,9 @@ function itemClick(array) {
 	$('.choice').on('click', function(){
 		console.log('Click working');
 		var correct = false;
+		
+		$(this).animate({opacity: 1}, 1);
+
 		if (clicked === false) {
 			if ($(this).hasClass('correct')){
 				$('.answer_head').text('Correct!')
@@ -87,11 +92,27 @@ function itemClick(array) {
 	})
 }
 
+// Function to add animation for mouse over
+
+function itemHover(){
+	console.log(clicked);
+	$('.choice').on('mouseenter', function(){
+		if (clicked === false) {
+			$(this).animate({opacity: 0.5}, 150);
+		}
+	});
+	$('.choice').on('mouseleave', function(){
+		// if (clicked === false) {
+			$(this).animate({opacity: 1}, 1);
+		// }
+	});
+}
+
 // Function to show info regarding question
 
 Question.prototype.showInfo= function(){
 	if (clicked === false) {
-		$('.correct').clone().appendTo($('.poster'));
+		$('.correct').clone().animate({opacity: 1}, 1).appendTo($('.poster'));
 		$('.description').append(this.descriptionText);
 		$('.answer').show();
 	}
