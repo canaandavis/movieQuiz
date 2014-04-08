@@ -54,7 +54,7 @@ Question.prototype.updateQuestion = function(){
 	$('.choices_container').append(this.moviePosters);
 	$(this.moviePosters).slideDown('5000');
 	// this.playAudio();
-}
+};
 
 // Function to play / stop audio
 
@@ -62,11 +62,11 @@ Question.prototype.playAudio= function(){
 	this.audio[0].volume = 0.5;
 	this.audio[0].load();
 	this.audio[0].play();
-}
+};
 
 Question.prototype.stopAudio = function(){
 	this.audio[0].pause();
-}
+};
 
 // Function to display instructions on page load
 
@@ -92,18 +92,24 @@ function itemClick(array) {
 
 		if (clicked === false) {
 			if ($(this).hasClass('correct')){
-				$('.answer_head').text('Correct!')
+				resultsUpdate('Correct!');
 				correct = true;
 				correctCount++;
 			}
 			else {
-				$('.answer_head').text('Incorrect!')
+				resultsUpdate('Incorrect!');
 			}
 		}
 		progressUpdate(correct);
 		array[count].showInfo();
 		clicked = true;
-	})
+	});
+}
+
+// Function to update results text
+
+function resultsUpdate(event){
+	$('.answer_head').text(event);
 }
 
 // Function to add animation for mouse over
@@ -130,7 +136,7 @@ Question.prototype.showInfo= function(){
 		$('.description').append(this.descriptionText);
 		$('.answer').show();
 	}
-}
+};
 
 // Function to update progress bar
 
@@ -152,18 +158,38 @@ function nextQuestion(event){
 	event[count].stopAudio();
 	count++;
 	clicked = false;
+	$('.choices_container').empty();
+	$('.answer').find('.poster').empty();
+	$('.answer').find('.description').empty();
+	$('.answer').hide();
 	if (count > 4){
-		// Will add code to show Final screen
-		alert(correctCount + "/5");
+		finalResults(correctCount);
+		// alert(correctCount + "/5");
 	}
 	else {
-		$('.choices_container').empty();
-		$('.answer').find('.poster').empty();
-		$('.answer').find('.description').empty();
-		$('.answer').hide();
 		event[count].updateQuestion();
 	}
 }
+
+// Function to update final stats
+ 
+ function finalResults(event){
+	var $finalParagraph = $('.final').find('p');
+	$('.final').find('#header').text(event + '/5');
+
+	if (+event >= 4) {
+		$finalParagraph.text("Well done.  Would you like to test your knowledge with some more films?");
+	}
+	else if (+event >=2) {
+		$finalParagraph.text("Not too bad.  Lets try some more films.");
+	}
+
+	else {
+		$finalParagraph.text("Maybe another set of films would suit you better.  Lets give it a try.");
+	}
+
+	$('.final').show();
+ }
 
 // HTML Variables
 var divStart = "<div class='choice'>";
