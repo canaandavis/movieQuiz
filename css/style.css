@@ -7,19 +7,48 @@ html {
 }
 body {
 	/*background-color: rgba(255, 255, 255, 1.0000);*/
-	background-image: url("../images/Elegant_Background-18.jpg");
+	background-image: url("../images/tweed.png");
 }
 
 .container {
 	/*background-color: rgba(255, 255, 255, .3000);*/
-	background-color: rgba(29, 31, 33, .6000);
+	background-color: rgba(29, 31, 33, .5000);
 	height: 750px;
 	width: 1050px;
 	margin: 20px auto;
-	border-radius: 10px;
+	border-radius: 5px;
 	text-align: center;
 	color: white;
 	position: relative;
+}
+
+/* EndGame overlay */
+.endGame {
+	background-color: rgba(29, 31, 33, .9500);
+	height: 750px;
+	width: 1050px;
+	position: absolute;
+	border-radius: 5px;
+	font-family: 'Oswald', sans-serif;
+	font-size: 35px;
+	padding-top: 175px;
+	display: none;
+}
+
+.endGame #header, .endGame #close {
+	font-size: 60px;
+}
+
+.endGame #total {
+	font-size: 40px;
+}
+
+.endGame #stars {
+	font-size: 35px;
+}
+
+.engGame #tagline {
+	font-size: 25px;
 }
 
 /* Final overlay */
@@ -28,11 +57,33 @@ body {
 	height: 750px;
 	width: 1050px;
 	position: absolute;
-	border-radius: 10px;
+	border-radius: 5px;
 	font-family: 'Oswald', sans-serif;
 	font-size: 35px;
 	padding-top: 175px;
 	display: none;
+}
+
+.final #header, .endGame #header {
+	font-size: 60px;
+}
+
+.final button {
+	border: none;
+	height: 40px;
+	min-width: 100px;
+	font-family: 'Oswald', sans-serif;
+	font-size: 18px;
+	color: white;
+	background-color: rgba(165, 31, 23, .7000);
+}
+
+.final button:hover {
+	background-color: rgba(165, 31, 23, 1.000);
+}
+
+.final button:focus {
+	outline: none;
 }
 
 /*Instructions Overlay*/
@@ -41,7 +92,7 @@ body {
 	height: 750px;
 	width: 1050px;
 	position: absolute;
-	border-radius: 10px;
+	border-radius: 5px;
 	font-family: 'Oswald', sans-serif;
 	font-size: 35px;
 	padding-top: 175px;
@@ -174,7 +225,7 @@ header {
 	height: 50px;
 	width: 100%;
 	float: left;
-	margin-top: 80px;
+	margin-top: 100px;
 }
 
 .progress_indicator {
@@ -194,19 +245,19 @@ header {
 
 .progress_incorrect {
 	border: 2px solid #a51f17;
-	background-color: rgba(29, 31, 33, .3900);
+	background-color: rgba(29, 31, 33, .8900);
 }
 
 /*Audio Controls*/
 .audio_controls {
 	height: 40px;
 	width: 100%;
-	float: left;
-	margin-top: 40px;
+	float: right;
+	margin-top: 50px;
 	text-align: right;
 	font-family: 'Oswald', sans-serif;
-	font-size: 22px;
-	padding-right: 25px;
+	font-size: 30px;
+	padding-right: 30px;
 	color: white;
 }
 
@@ -220,7 +271,7 @@ header {
 	width: 100%;
 	float: left;
 	text-align: center;
-	margin-top: 20px;
+	margin-top: 80px;
 }
 .choice {
 	height: 350px;
@@ -245,5 +296,5 @@ img {
 	margin: auto;
 	width: 400px;
 	color: white;
-	font-family: 'Old Standard TT', serif;
+	font-family: 'Oswald', sans-serif;
 }

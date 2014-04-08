@@ -2,7 +2,8 @@ $(document).ready(function(){
 	console.log("js working");
 
 	// Questions array
-	var questions = [questionOne, questionTwo, questionThree, questionFour, questionFive];
+	var questionsArray = [[questionOne, questionTwo, questionThree, questionFour, questionFive], [questionSix, questionSeven, questionEight, questionNine, questionTen]]
+	var questions = questionsArray[game];
 
 	instructionLoad(questions);
 
@@ -22,6 +23,18 @@ $(document).ready(function(){
 		itemHover();
 	});
 
+	$('.final').find('button').on('click', function(){
+		game++;
+		count = 0;
+		correctCount = 0;
+		progressReset();
+		$('.final').slideUp(450);
+		questions = questionsArray[game];
+		questions[count].updateQuestion();
+		itemClick(questions);
+		itemHover();
+	});
+
 	itemClick(questions);
 	itemHover();
 
@@ -35,10 +48,12 @@ var clicked = false;
 // Count variable for accessing array
 var count = 0;
 
-// Total correct variable
+// Total correct variables
 var correctCount = 0;
+var totalCorrect = 0;
 
-
+// Game number
+var game = 0;
 
 // The question object
 
@@ -51,8 +66,7 @@ function Question(audio, moviePosters, descriptionText) {
 // Function to update and append question content
 
 Question.prototype.updateQuestion = function(){
-	$('.choices_container').append(this.moviePosters);
-	$(this.moviePosters).slideDown('5000');
+	$('.choices_container').append(this.moviePosters).hide().fadeIn(500);
 	// this.playAudio();
 };
 
@@ -68,6 +82,16 @@ Question.prototype.stopAudio = function(){
 	this.audio[0].pause();
 };
 
+// Function to show info regarding question
+
+Question.prototype.showInfo= function(){
+	if (clicked === false) {
+		$('.correct').clone().animate({opacity: 1}, 1).appendTo($('.poster'));
+		$('.description').append(this.descriptionText);
+		$('.answer').fadeIn(350);
+	}
+};
+
 // Function to display instructions on page load
 
 function instructionLoad(event){
@@ -76,7 +100,7 @@ function instructionLoad(event){
 		event[count].updateQuestion();
 		itemHover();
 		itemClick(event);
-		$(this).closest('.instructions').slideUp(475);
+		$(this).closest('.instructions').fadeOut(450);
 	});
 	
 }
@@ -95,6 +119,7 @@ function itemClick(array) {
 				resultsUpdate('Correct!');
 				correct = true;
 				correctCount++;
+				totalCorrect++;
 			}
 			else {
 				resultsUpdate('Incorrect!');
@@ -128,16 +153,6 @@ function itemHover(){
 	});
 }
 
-// Function to show info regarding question
-
-Question.prototype.showInfo= function(){
-	if (clicked === false) {
-		$('.correct').clone().animate({opacity: 1}, 1).appendTo($('.poster'));
-		$('.description').append(this.descriptionText);
-		$('.answer').show();
-	}
-};
-
 // Function to update progress bar
 
 function progressUpdate(event) {
@@ -152,21 +167,38 @@ function progressUpdate(event) {
 	}
 }
 
+// Function to reset progress bar
+function progressReset(){
+	for (i=0; i<progressArray.length; i++){
+		progressArray[i].removeClass('progress_correct progress_incorrect');
+	}
+}
+
 // Function to load next question
 
 function nextQuestion(event){
 	event[count].stopAudio();
 	count++;
 	clicked = false;
-	$('.choices_container').empty();
-	$('.answer').find('.poster').empty();
-	$('.answer').find('.description').empty();
-	$('.answer').hide();
-	if (count > 4){
+	$('.choices_container').fadeOut(200).empty();
+	$('.answer').find('.poster').fadeOut(150, function(){
+		$(this).empty().show();
+	});
+	$('.answer').find('.description').fadeOut(150, function(){
+		$(this).empty().show();
+	});
+	$('.answer').fadeOut(150);
+	
+	if (game === 1 && count > 4) {
+		console.log(totalCorrect + "/" + correctCount);
+		endResults();
+		$('.endGame').slideDown(450);
+	}
+	else if (count > 4){
 		finalResults(correctCount);
-		// alert(correctCount + "/5");
 	}
 	else {
+		console.log(event);
 		event[count].updateQuestion();
 	}
 }
@@ -188,7 +220,41 @@ function nextQuestion(event){
 		$finalParagraph.text("Maybe another set of films would suit you better.  Lets give it a try.");
 	}
 
-	$('.final').show();
+	$('.final').slideDown(450);
+ }
+
+ // Function to update End Game results
+
+ function endResults(){
+ 	var faStar = "<i class='fa fa-star'></i>";
+ 	var $stars = $('#stars');
+ 	var $tagline = $('#tagLine');
+ 	$('.endGame').find('#header').text(correctCount + "/5 this round");
+ 	$('.endGame').find('#total').text(totalCorrect + "/10 for the game");
+ 	if (+totalCorrect === 10) {
+ 		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + faStar + "\"");
+ 		$tagline.text("Great Job! You did it, you really did it!");
+ 	}
+ 	else if (+totalCorrect > 7) {
+ 		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + "\"");
+ 		$tagline.text("Well done, you know your stuff, dude");
+ 	}
+ 	else if(+totalCorrect > 4) {
+ 		$stars.empty().append("\"" + faStar + faStar + faStar + "\"");
+ 		$tagline.text("Good job, you should feel good about yourself");
+ 	}
+ 	else if(+totalCorrect > 2){
+ 		$stars.empty().append("\"" + faStar + faStar + "\"");
+ 		$tagline.text("You did ok, just ok though");
+ 	}
+ 	else if(+totalCorrect > 1){
+ 		$stars.empty().append("\"" + faStar + "\"");
+ 		$tagline.text("'Maybe you're just not a movie buff' - everyone");
+ 	}
+ 	else {
+ 		$stars.empty().append("\"" + "<i class='fa fa-star-half'></i>" + "\"");
+ 		$tagline.text("Lets just forget this happened");
+ 	}
  }
 
 // HTML Variables
@@ -245,10 +311,10 @@ var questionTwo = new Question(questionTwoAudio, questionTwoImages, questionTwoD
 
 // Question 3 variables
 
-var questionThreeImageOne = divCorrect + imageSrc + 'robinhood.jpg' + divEnd;
+var questionThreeImageOne = divStart + imageSrc + 'toystory.jpg' + divEnd;
 var questionThreeImageTwo = divStart + imageSrc + 'spirited.jpg' + divEnd;
 var questionThreeImageThree = divStart + imageSrc + 'fantastic.jpg' + divEnd;
-var questionThreeImageFour = divStart + imageSrc + 'toystory.jpg' + divEnd;
+var questionThreeImageFour = divCorrect + imageSrc + 'robinhood.jpg' + divEnd;
 var questionThreeImages = questionThreeImageOne + questionThreeImageTwo + questionThreeImageThree + questionThreeImageFour;
 
 var questionThreeAudio = $('#questionThreeAudio');
@@ -293,8 +359,8 @@ var questionFour = new Question(questionFourAudio, questionFourImages, questionF
 
 var questionFiveImageOne = divStart + imageSrc + 'diehard.jpg' + divEnd;
 var questionFiveImageTwo = divStart + imageSrc + 'roadhouse.jpg' + divEnd;
-var questionFiveImageThree = divCorrect + imageSrc + 'conair.jpg' + divEnd;
-var questionFiveImageFour = divStart + imageSrc + 'bigtrouble.jpg' + divEnd;
+var questionFiveImageThree = divStart + imageSrc + 'bigtrouble.jpg' + divEnd;
+var questionFiveImageFour = divCorrect + imageSrc + 'conair.jpg' + divEnd;
 var questionFiveImages = questionFiveImageOne + questionFiveImageTwo + questionFiveImageThree + questionFiveImageFour;
 
 var questionFiveAudio = $('#questionFiveAudio');
@@ -311,3 +377,103 @@ var questionFiveDescriptionText = ("Cameron Poe, who is a highly decorated Unite
 	stop the criminals including, Cyrus 'The Virus' Grissom.");
 
 var questionFive = new Question(questionFiveAudio, questionFiveImages, questionFiveDescriptionText);
+
+// Question 6 Variables
+
+var questionSixImageOne = divCorrect + imageSrc + 'ghost.jpg' + divEnd;
+var questionSixImageTwo = divStart + imageSrc + 'lost.jpg' + divEnd;
+var questionSixImageThree = divStart + imageSrc + 'ground.jpg' + divEnd;
+var questionSixImageFour = divStart + imageSrc + 'caddy.jpg' + divEnd;
+var questionSixImages = questionSixImageOne + questionSixImageTwo + questionSixImageThree + questionSixImageFour;
+
+var questionSixAudio = $('#questionSixAudio');
+
+var questionSixDescriptionText = ("Ghostbusters is a 1984 American supernatural comedy film directed and produced by \
+	Ivan Reitman and written by Dan Aykroyd and Harold Ramis. It stars Bill Murray, Aykroyd, and Ramis as three eccentric \
+	parapsychologists in New York City who start a ghost-catching business. Sigourney Weaver and Rick Moranis co-star as \
+	a potential client and her neighbor. The Ghostbusters business booms after initial skepticism, but when an uptown \
+	high-rise apartment building becomes the focal point of spirit activity linked to the ancient god Gozer, it \
+	threatens to overwhelm the team and the entire world.");
+
+var questionSix = new Question(questionSixAudio, questionSixImages, questionSixDescriptionText);
+
+// Question 7 variables
+
+var questionSevenImageOne = divStart + imageSrc + 'royal.jpg' + divEnd;
+var questionSevenImageTwo = divStart + imageSrc + 'rush.jpg' + divEnd;
+var questionSevenImageThree = divCorrect + imageSrc + 'life.jpg' + divEnd;
+var questionSevenImageFour = divStart + imageSrc + 'grand.jpg' + divEnd;
+var questionSevenImages = questionSevenImageOne + questionSevenImageTwo + questionSevenImageThree + questionSevenImageFour;
+
+var questionSevenAudio = $('#questionSevenAudio');
+
+var questionSevenDescriptionText = ("he Life Aquatic with Steve Zissou is a 2004 American comedy-drama \
+	film directed, co-written, and co-produced by Wes Anderson. It is Anderson's fourth feature \
+	length film, released in the U.S. on Christmas 2004. It was written by Anderson and Noah Baumbach \
+	and was filmed in and around Naples, Ponza, and the Italian Riviera.\
+	The film stars Bill Murray as the eponymous Zissou, an eccentric oceanographer who \
+	sets out to exact revenge on the 'Jaguar shark' that ate his partner Esteban. \
+	Zissou is both a parody of and homage to French diving pioneer Jacques-Yves Cousteau (1910–1997), \
+	to whom the film is dedicated. Cate Blanchett, Willem Dafoe, Michael Gambon, Jeff Goldblum, Anjelica \
+	Huston, Owen Wilson, Seu Jorge, and Bud Cort are also featured in the film.");
+
+var questionSeven = new Question(questionSevenAudio, questionSevenImages, questionSevenDescriptionText);
+
+// Question 8 variables
+
+var questionEightImageOne = divCorrect + imageSrc + 'jurassic.jpg' + divEnd;
+var questionEightImageTwo = divStart + imageSrc + 'independence.jpg' + divEnd;
+var questionEightImageThree = divStart + imageSrc + 't2.jpg' + divEnd;
+var questionEightImageFour = divStart + imageSrc + 'mi.jpg' + divEnd;
+var questionEightImages = questionEightImageOne + questionEightImageTwo + questionEightImageThree + questionEightImageFour;
+
+var questionEightAudio = $('#questionEightAudio');
+
+var questionEightDescriptionText = ("Jurassic Park is a 1993 American science fiction action film \
+	that incorporates some horror elements as well. The film was directed by Steven Spielberg and is \
+	the first installment of the Jurassic Park franchise. It is based on the 1990 novel of the same name \
+	by Michael Crichton, with a screenplay written by Crichton and David Koepp. It stars Sam Neill, Laura Dern, \
+	Jeff Goldblum, Richard Attenborough, Ariana Richards, Joseph Mazzello, Martin Ferrero, Wayne Knight, \
+	Samuel L. Jackson and Bob Peck. The film centers on the fictional Isla Nublar, an islet located off \
+	Costa Rica's Pacific Coast, where a billionaire philanthropist and a small team of genetic scientists \
+	have created a wildlife park of cloned dinosaurs.");
+
+var questionEight = new Question(questionEightAudio, questionEightImages, questionEightDescriptionText);
+
+// Question 9 variables
+
+var questionNineImageOne = divStart + imageSrc + 'et.jpg' + divEnd;
+var questionNineImageTwo = divCorrect + imageSrc + 'back.jpg' + divEnd;
+var questionNineImageThree = divStart + imageSrc + 'gremlins.jpg' + divEnd;
+var questionNineImageFour = divStart + imageSrc + 'goonies.jpg' + divEnd;
+var questionNineImages = questionNineImageOne + questionNineImageTwo + questionNineImageThree + questionNineImageFour;
+
+var questionNineAudio = $('#questionNineAudio');
+
+var questionNineDescriptionText = ("Back to the Future is a 1985 American science fiction comedy film. \
+	It was directed by Robert Zemeckis, written by Zemeckis and Bob Gale, produced by Steven Spielberg, \
+	and stars Michael J. Fox, Christopher Lloyd, Lea Thompson, Crispin Glover and Thomas F. Wilson. \
+	Fox plays Marty McFly, a teenager who is accidentally sent back in time to 1955. He meets his future \
+	parents in high school and accidentally attracts his mother's romantic interest. Marty must repair the \
+	damage to history by causing his parents-to-be to fall in love, and with the help of scientist \
+	Dr. Emmett \"Doc\" Brown (Lloyd), he must find a way to return to 1985.");
+
+var questionNine = new Question(questionNineAudio, questionNineImages, questionNineDescriptionText);
+
+// Question 10 variables
+
+var questionTenImageOne = divCorrect + imageSrc + 'thing.jpg' + divEnd;
+var questionTenImageTwo = divStart + imageSrc + 'dead.jpg' + divEnd;
+var questionTenImageThree = divStart + imageSrc + 'deadalive.jpg' + divEnd;
+var questionTenImageFour = divStart + imageSrc + 'cabin.jpg' + divEnd;
+var questionTenImages = questionTenImageOne + questionTenImageTwo + questionTenImageThree + questionTenImageFour;
+
+var questionTenAudio = $('#questionTenAudio');
+
+var questionTenDescriptionText = ("The Thing (also known as John Carpenter's The Thing) is a 1982 \
+	American science fiction horror film directed by John Carpenter, written by Bill Lancaster, and \
+	starring Kurt Russell. The film's title refers to its primary antagonist: a parasitic extraterrestrial \
+	lifeform that assimilates other organisms and in turn imitates them. The Thing infiltrates an Antarctic \
+	research station, taking the appearance of the researchers that it absorbs, and paranoia develops within the group.");
+
+var questionTen = new Question(questionTenAudio, questionTenImages, questionTenDescriptionText);
