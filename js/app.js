@@ -24,11 +24,7 @@ $(document).ready(function(){
 	});
 
 	$('.final').find('button').on('click', function(){
-		game++;
-		count = 0;
-		correctCount = 0;
-		progressReset();
-		$('.final').slideUp(450);
+		nextRound();
 		questions = questionsArray[game];
 		questions[count].updateQuestion();
 		itemClick(questions);
@@ -202,6 +198,17 @@ function nextQuestion(event){
 		event[count].updateQuestion();
 	}
 }
+
+// function to move to next round
+
+function nextRound(){
+	game++;
+	count = 0;
+	correctCount = 0;
+	progressReset();
+	$('.final').slideUp(450);
+}
+
 
 // Function to update final stats
  
