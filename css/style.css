@@ -1,4 +1,6 @@
 * {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	margin: 0;
 }
@@ -20,6 +22,8 @@ body {
 	text-align: center;
 	color: white;
 	position: relative;
+	padding-right: 20px;
+	padding-left: 20px;
 }
 
 /* EndGame overlay */
@@ -62,6 +66,7 @@ body {
 	font-size: 35px;
 	padding-top: 175px;
 	display: none;
+	left: 0;
 }
 
 .final #header, .endGame #header {
@@ -92,6 +97,7 @@ body {
 	height: 750px;
 	width: 1050px;
 	position: absolute;
+	left: 0;
 	border-radius: 5px;
 	font-family: 'Oswald', sans-serif;
 	font-size: 35px;
@@ -255,6 +261,7 @@ header {
 	border: 2px solid #a51f17;
 	color: rgba(29, 31, 33, .8900);
 	font-size: 60px;
+	-moz-font-size: 63px;
 }
 
 /*Audio Controls*/
@@ -266,8 +273,8 @@ header {
 	text-align: right;
 	font-family: 'Oswald', sans-serif;
 	font-size: 30px;
-	padding-right: 35px;
 	color: white;
+	margin-right: 20px
 }
 
 .audio_controls a{

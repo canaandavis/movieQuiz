@@ -44,8 +44,10 @@ $(document).ready(function(){
 		$('.instructions').append("<button id='got_it'>Got It</button>");
 		$('#got_it').on('click', function(){
 			$('.instructions').fadeOut(450);
+			$('.instructions').find('#got_it').remove();
 		});
 		$('.instructions').slideDown(450);
+
 	});
 
 
@@ -80,7 +82,7 @@ function Question(audio, moviePosters, descriptionText) {
 
 Question.prototype.updateQuestion = function(){
 	$('.choices_container').append(this.moviePosters).hide().fadeIn(500);
-	// this.playAudio();
+	this.playAudio();
 };
 
 // Function to play / stop audio
