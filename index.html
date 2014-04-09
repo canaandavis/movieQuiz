@@ -19,7 +19,7 @@
 			it is your job to guess which movie this clip is from<br>
 			by clicking the correct movie poster<br>
 			you can use the audio controls to replay the clip if needed<br>
-			<button>Lets do it!</button>
+			<button id="get_started">Lets do it!</button>
 		</div>
 
 		<div class="endGame">
@@ -27,13 +27,14 @@
 			<span id="total"></span><br>
 			<span id="stars"></span><br>
 			<span id="tagLine"></span><br>
-			<span id="close">THANKS FOR PLAYING!</span>
+			<span id="close">THANKS FOR PLAYING!</span><br>
+			<button id="start_over">Start Over</button>
 		</div>
 
 		<div class="final">
 			<span id="header"></span>
 			<p></p>
-			<button>Play Another Round</button>
+			<button id="no_button">No Thanks</button> <button id="next_round">Play Another Round</button>
 		</div>
 
 		<div class="answer">
@@ -58,16 +59,15 @@
 					<div class="progress_indicator" id="progress_2"></div>
 					<div class="progress_indicator" id="progress_1"></div>
 			</div>
-			<!-- <div class="audio_controls">replay clip</div> -->
 		</header>
 		
 		<div class="choices_container">
-			<!-- <div class="choice" id="choice_1"><img src="images/shining.jpg"></div>
-			<div class="choice" id="choice_2"><img src="images/alien.jpg"></div>
-			<div class="choice" id="choice_3"><img src="images/halloween.jpg"></div>
-			<div class="choice" id="choice_4"><img src="images/nightmare.jpg"></div> -->
 		</div>
-		<div class="audio_controls"><a href='#' id='play'><i class="fa fa-play"></i></a>  &nbsp; |  &nbsp; <a href='#' id='stop'><i class="fa fa-stop"></i></a></div>
+		<div class="audio_controls">
+			<!-- <span id="clickInstructions">click poster to submit answer</span> -->
+			<a href="#"><span id="instructions_link">::Instructions::</span></a>
+			Audio Controls: &nbsp;
+			<a href='#' id='play'><i class="fa fa-play"></i></a>  &nbsp; |  &nbsp; <a href='#' id='stop'><i class="fa fa-stop"></i></a></div>
 	</div>
 	<audio src="audio/cool.mp3" id='questionOneAudio'></audio>
 	<audio src="audio/cool.mp3" id='questionTwoAudio'></audio>

@@ -2,7 +2,7 @@ $(document).ready(function(){
 	console.log("js working");
 
 	// Questions array
-	var questionsArray = [[questionOne, questionTwo, questionThree, questionFour, questionFive], [questionSix, questionSeven, questionEight, questionNine, questionTen]]
+	var questionsArray = [[questionOne, questionTwo, questionThree, questionFour, questionFive], [questionSix, questionSeven, questionEight, questionNine, questionTen]];
 	var questions = questionsArray[game];
 
 	instructionLoad(questions);
@@ -19,20 +19,37 @@ $(document).ready(function(){
 	
 	$('.answer').find('button').on('click', function(){
 		nextQuestion(questions);
-		itemClick(questions);
-		itemHover();
+		styleUpdate(questions);
 	});
 
-	$('.final').find('button').on('click', function(){
+	$('.final').find('#next_round').on('click', function(){
 		nextRound();
 		questions = questionsArray[game];
 		questions[count].updateQuestion();
-		itemClick(questions);
-		itemHover();
+		styleUpdate(questions);
 	});
 
-	itemClick(questions);
-	itemHover();
+	$('.final').find('#no_button').on('click', function(){
+		endRoundOne();
+	});
+
+	$('.endGame').find('#start_over').on('click', function(){
+		game = 0;
+		questions = questionsArray[game];
+		newGame(questions);
+	});
+
+	$('#instructions_link').on('click', function(){
+		$('.instructions').find('#get_started').remove();
+		$('.instructions').append("<button id='got_it'>Got It</button>");
+		$('#got_it').on('click', function(){
+			$('.instructions').fadeOut(450);
+		});
+		$('.instructions').slideDown(450);
+	});
+
+
+	styleUpdate(questions);
 
 });
 
@@ -92,10 +109,9 @@ Question.prototype.showInfo= function(){
 
 function instructionLoad(event){
 	$('.instructions').show();
-	$('.instructions').find('button').on('click', function(){
+	$('.instructions').find('#get_started').on('click', function(){
 		event[count].updateQuestion();
-		itemHover();
-		itemClick(event);
+		styleUpdate(event);
 		$(this).closest('.instructions').fadeOut(450);
 	});
 	
@@ -105,7 +121,7 @@ function instructionLoad(event){
 
 function itemClick(array) {
 	$('.choice').on('click', function(){
-		console.log('Click working');
+		// console.log('Click working');
 		var correct = false;
 		
 		$(this).animate({opacity: 1}, 1);
@@ -136,17 +152,23 @@ function resultsUpdate(event){
 // Function to add animation for mouse over
 
 function itemHover(){
-	console.log(clicked);
+	// console.log(clicked);
+
 	$('.choice').on('mouseenter', function(){
 		if (clicked === false) {
 			$(this).animate({opacity: 0.5}, 250);
 		}
 	});
 	$('.choice').on('mouseleave', function(){
-		// if (clicked === false) {
-			$(this).animate({opacity: 1}, 100);
-		// }
+		$(this).animate({opacity: 1}, 100);
 	});
+}
+
+// function calling itemClick and itemHove, to update styles 
+
+function styleUpdate(event){
+	itemClick(event);
+	itemHover();
 }
 
 // Function to update progress bar
@@ -155,10 +177,12 @@ function progressUpdate(event) {
 	var progressItem = progressArray[count];
 	if (clicked === false) {
 		if (event) {
-			progressItem.addClass('progress_correct');
+			progressItem.append('<i class="fa fa-check-circle"></i>')
+			.addClass('progress_correct');
 		}
 		else {
-			progressItem.addClass('progress_incorrect');
+			progressItem.append('<i class="fa fa-times-circle"></i>')
+			.addClass('progress_incorrect');
 		}
 	}
 }
@@ -166,7 +190,8 @@ function progressUpdate(event) {
 // Function to reset progress bar
 function progressReset(){
 	for (i=0; i<progressArray.length; i++){
-		progressArray[i].removeClass('progress_correct progress_incorrect');
+		progressArray[i].removeClass('progress_correct progress_incorrect')
+		.empty();
 	}
 }
 
@@ -209,6 +234,19 @@ function nextRound(){
 	$('.final').slideUp(450);
 }
 
+// function for a new game 
+
+function newGame(event){
+	count = 0;
+	correctCount = 0;
+	game = 0;
+	totalCorrect = 0;
+	$('.endGame').slideUp(450);
+	progressReset();
+	event[count].updateQuestion();
+	styleUpdate(event);
+}
+
 
 // Function to update final stats
  
@@ -222,7 +260,6 @@ function nextRound(){
 	else if (+event >=2) {
 		$finalParagraph.text("Not too bad.  Lets try some more films.");
 	}
-
 	else {
 		$finalParagraph.text("Maybe another set of films would suit you better.  Lets give it a try.");
 	}
@@ -230,53 +267,96 @@ function nextRound(){
 	$('.final').slideDown(450);
  }
 
+ // Function for end results after one round
+
+ function endRoundOne(){
+	var faStar = "<i class='fa fa-star'></i>";
+	var $stars = $('#stars');
+	var $tagline = $('#tagLine');
+
+	$('.endGame').find('#total').remove();
+
+	$('.endGame').find('#header').text(correctCount + "/5 this round");
+	if (+correctCount === 5) {
+		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + faStar + "\"");
+		$tagline.text("Great Job! You did it, you really did it!");
+	}
+	else if (+correctCount === 4) {
+		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + "\"");
+		$tagline.text("Well done, you know your stuff, dude");
+	}
+	else if(+correctCount === 3) {
+		$stars.empty().append("\"" + faStar + faStar + faStar + "\"");
+		$tagline.text("Good job, you should feel good about yourself, really");
+	}
+	else if(+correctCount === 2){
+		$stars.empty().append("\"" + faStar + faStar + "\"");
+		$tagline.text("You did ok, just ok though");
+	}
+	else if(+correctCount === 1){
+		$stars.empty().append("\"" + faStar + "\"");
+		$tagline.text("'Maybe you're just not a movie buff' - everyone");
+	}
+	else {
+		$stars.empty().append("\"" + "<i class='fa fa-star-half'></i>" + "\"");
+		$tagline.text("Lets just forget this happened");
+	}
+	$('.final').slideUp(450);
+	$('.endGame').fadeIn(700);
+ }
+
  // Function to update End Game results
 
  function endResults(){
- 	var faStar = "<i class='fa fa-star'></i>";
- 	var $stars = $('#stars');
- 	var $tagline = $('#tagLine');
- 	$('.endGame').find('#header').text(correctCount + "/5 this round");
- 	$('.endGame').find('#total').text(totalCorrect + "/10 for the game");
- 	if (+totalCorrect === 10) {
- 		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + faStar + "\"");
- 		$tagline.text("Great Job! You did it, you really did it!");
- 	}
- 	else if (+totalCorrect > 7) {
- 		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + "\"");
- 		$tagline.text("Well done, you know your stuff, dude");
- 	}
- 	else if(+totalCorrect > 4) {
- 		$stars.empty().append("\"" + faStar + faStar + faStar + "\"");
- 		$tagline.text("Good job, you should feel good about yourself");
- 	}
- 	else if(+totalCorrect > 2){
- 		$stars.empty().append("\"" + faStar + faStar + "\"");
- 		$tagline.text("You did ok, just ok though");
- 	}
- 	else if(+totalCorrect > 1){
- 		$stars.empty().append("\"" + faStar + "\"");
- 		$tagline.text("'Maybe you're just not a movie buff' - everyone");
- 	}
- 	else {
- 		$stars.empty().append("\"" + "<i class='fa fa-star-half'></i>" + "\"");
- 		$tagline.text("Lets just forget this happened");
- 	}
+	var faStar = "<i class='fa fa-star'></i>";
+	var $stars = $('#stars');
+	var $tagline = $('#tagLine');
+	$('.endGame').find('#header').text(correctCount + "/5 this round");
+	
+	$('.endGame').find('#total').text(totalCorrect + "/10 for the game");
+
+	if (+totalCorrect === 10) {
+		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + faStar + "\"");
+		$tagline.text("Great Job! You did it, you really did it!");
+	}
+	else if (+totalCorrect > 7) {
+		$stars.empty().append("\"" + faStar + faStar + faStar + faStar + "\"");
+		$tagline.text("Well done, you know your stuff, dude");
+	}
+	else if(+totalCorrect > 4) {
+		$stars.empty().append("\"" + faStar + faStar + faStar + "\"");
+		$tagline.text("Good job, you should feel good about yourself");
+	}
+	else if(+totalCorrect > 2){
+		$stars.empty().append("\"" + faStar + faStar + "\"");
+		$tagline.text("You did ok, just ok though");
+	}
+	else if(+totalCorrect > 1){
+		$stars.empty().append("\"" + faStar + "\"");
+		$tagline.text("'Maybe you're just not a movie buff' - everyone");
+	}
+	else {
+		$stars.empty().append("\"" + "<i class='fa fa-star-half'></i>" + "\"");
+		$tagline.text("Lets just forget this happened");
+	}
  }
 
-// HTML Variables
-var divStart = "<div class='choice'>";
-var divCorrect = "<div class='choice correct'>";
-var divEnd = "'></div>";
-var imageSrc = "<img src='images/";
+// Function to add Image as poster
 
-// Question 1 varibales
+function imageAdd(file, correctClass){
+	correctClass = typeof correctClass !== 'undefined' ? correctClass : false;
 
-var questionOneImageOne = divCorrect + imageSrc + 'shining.jpg' + divEnd;
-var questionOneImageTwo = divStart + imageSrc + 'alien.jpg' + divEnd;
-var questionOneImageThree = divStart + imageSrc + 'halloween.jpg' + divEnd;
-var questionOneImageFour = divStart + imageSrc + 'nightmare.jpg' + divEnd;
-var questionOneImages = questionOneImageOne + questionOneImageTwo + questionOneImageThree + questionOneImageFour;
+	if (correctClass) {
+		return "<div class='choice correct'><img src='images/" + file + "'></div>";
+	}
+	else {
+		return "<div class='choice'><img src='images/" + file + "'></div>";
+	}
+}
+
+// Question One Variables
+
+var questionOneImages = imageAdd('shining.jpg', true) + imageAdd('alien.jpg') + imageAdd('halloween.jpg') + imageAdd('nightmare.jpg');
 
 var questionOneAudio = $('#questionOneAudio');
 
@@ -294,11 +374,7 @@ var questionOne = new Question(questionOneAudio, questionOneImages, questionOneD
 
 // Question 2 variables
 
-var questionTwoImageOne = divStart + imageSrc + 'bladerunner.jpg' + divEnd;
-var questionTwoImageTwo = divCorrect + imageSrc + 'brazil.jpg' + divEnd;
-var questionTwoImageThree = divStart + imageSrc + 'fifth.jpg' + divEnd;
-var questionTwoImageFour = divStart + imageSrc + 'starwars.jpg' + divEnd;
-var questionTwoImages = questionTwoImageOne + questionTwoImageTwo + questionTwoImageThree + questionTwoImageFour;
+var questionTwoImages = imageAdd('bladerunner.jpg') + imageAdd('brazil.jpg', true) + imageAdd('fifth.jpg') + imageAdd('starwars.jpg');
 
 var questionTwoAudio = $('#questionTwoAudio');
 
@@ -318,11 +394,7 @@ var questionTwo = new Question(questionTwoAudio, questionTwoImages, questionTwoD
 
 // Question 3 variables
 
-var questionThreeImageOne = divStart + imageSrc + 'toystory.jpg' + divEnd;
-var questionThreeImageTwo = divStart + imageSrc + 'spirited.jpg' + divEnd;
-var questionThreeImageThree = divStart + imageSrc + 'fantastic.jpg' + divEnd;
-var questionThreeImageFour = divCorrect + imageSrc + 'robinhood.jpg' + divEnd;
-var questionThreeImages = questionThreeImageOne + questionThreeImageTwo + questionThreeImageThree + questionThreeImageFour;
+var questionThreeImages = imageAdd('toystory.jpg') + imageAdd('spirited.jpg') + imageAdd('fantastic.jpg') + imageAdd('robinhood.jpg', true);
 
 var questionThreeAudio = $('#questionThreeAudio');
 
@@ -340,11 +412,7 @@ var questionThree = new Question(questionThreeAudio, questionThreeImages, questi
 
 // Question 4 variables
 
-var questionFourImageOne = divStart + imageSrc + 'batman.jpg' + divEnd;
-var questionFourImageTwo = divCorrect + imageSrc + 'scott.jpg' + divEnd;
-var questionFourImageThree = divStart + imageSrc + 'v.jpg' + divEnd;
-var questionFourImageFour = divStart + imageSrc + 'watchmen.jpg' + divEnd;
-var questionFourImages = questionFourImageOne + questionFourImageTwo + questionFourImageThree + questionFourImageFour;
+var questionFourImages = imageAdd('batman.jpg') + imageAdd('scott.jpg', true) + imageAdd('v.jpg') + imageAdd('watchmen.jpg');
 
 var questionFourAudio = $('#questionFourAudio');
 
@@ -364,11 +432,7 @@ var questionFour = new Question(questionFourAudio, questionFourImages, questionF
 
 // Question 5 variables
 
-var questionFiveImageOne = divStart + imageSrc + 'diehard.jpg' + divEnd;
-var questionFiveImageTwo = divStart + imageSrc + 'roadhouse.jpg' + divEnd;
-var questionFiveImageThree = divStart + imageSrc + 'bigtrouble.jpg' + divEnd;
-var questionFiveImageFour = divCorrect + imageSrc + 'conair.jpg' + divEnd;
-var questionFiveImages = questionFiveImageOne + questionFiveImageTwo + questionFiveImageThree + questionFiveImageFour;
+var questionFiveImages = imageAdd('diehard.jpg') + imageAdd('roadhouse.jpg') + imageAdd('bigtrouble.jpg') + imageAdd('conair.jpg', true);
 
 var questionFiveAudio = $('#questionFiveAudio');
 
@@ -387,11 +451,7 @@ var questionFive = new Question(questionFiveAudio, questionFiveImages, questionF
 
 // Question 6 Variables
 
-var questionSixImageOne = divCorrect + imageSrc + 'ghost.jpg' + divEnd;
-var questionSixImageTwo = divStart + imageSrc + 'lost.jpg' + divEnd;
-var questionSixImageThree = divStart + imageSrc + 'ground.jpg' + divEnd;
-var questionSixImageFour = divStart + imageSrc + 'caddy.jpg' + divEnd;
-var questionSixImages = questionSixImageOne + questionSixImageTwo + questionSixImageThree + questionSixImageFour;
+var questionSixImages = imageAdd('ghost.jpg', true) + imageAdd('lost.jpg') + imageAdd('ground.jpg') + imageAdd('caddy.jpg');
 
 var questionSixAudio = $('#questionSixAudio');
 
@@ -406,11 +466,7 @@ var questionSix = new Question(questionSixAudio, questionSixImages, questionSixD
 
 // Question 7 variables
 
-var questionSevenImageOne = divStart + imageSrc + 'royal.jpg' + divEnd;
-var questionSevenImageTwo = divStart + imageSrc + 'rush.jpg' + divEnd;
-var questionSevenImageThree = divCorrect + imageSrc + 'life.jpg' + divEnd;
-var questionSevenImageFour = divStart + imageSrc + 'grand.jpg' + divEnd;
-var questionSevenImages = questionSevenImageOne + questionSevenImageTwo + questionSevenImageThree + questionSevenImageFour;
+var questionSevenImages = imageAdd('royal.png') + imageAdd('rush.jpg') + imageAdd('life.jpg', true) + imageAdd('grand.jpg');
 
 var questionSevenAudio = $('#questionSevenAudio');
 
@@ -428,11 +484,7 @@ var questionSeven = new Question(questionSevenAudio, questionSevenImages, questi
 
 // Question 8 variables
 
-var questionEightImageOne = divCorrect + imageSrc + 'jurassic.jpg' + divEnd;
-var questionEightImageTwo = divStart + imageSrc + 'independence.jpg' + divEnd;
-var questionEightImageThree = divStart + imageSrc + 't2.jpg' + divEnd;
-var questionEightImageFour = divStart + imageSrc + 'mi.jpg' + divEnd;
-var questionEightImages = questionEightImageOne + questionEightImageTwo + questionEightImageThree + questionEightImageFour;
+var questionEightImages = imageAdd('jurassic.jpg', true) + imageAdd('independence.jpg') + imageAdd('t2.jpg') + imageAdd('mi.jpg');
 
 var questionEightAudio = $('#questionEightAudio');
 
@@ -449,11 +501,7 @@ var questionEight = new Question(questionEightAudio, questionEightImages, questi
 
 // Question 9 variables
 
-var questionNineImageOne = divStart + imageSrc + 'et.jpg' + divEnd;
-var questionNineImageTwo = divCorrect + imageSrc + 'back.jpg' + divEnd;
-var questionNineImageThree = divStart + imageSrc + 'gremlins.jpg' + divEnd;
-var questionNineImageFour = divStart + imageSrc + 'goonies.jpg' + divEnd;
-var questionNineImages = questionNineImageOne + questionNineImageTwo + questionNineImageThree + questionNineImageFour;
+var questionNineImages = imageAdd('et.jpg') + imageAdd('back.jpg', true) + imageAdd('gremlins.jpg') + imageAdd('goonies.jpg');
 
 var questionNineAudio = $('#questionNineAudio');
 
@@ -469,11 +517,7 @@ var questionNine = new Question(questionNineAudio, questionNineImages, questionN
 
 // Question 10 variables
 
-var questionTenImageOne = divCorrect + imageSrc + 'thing.jpg' + divEnd;
-var questionTenImageTwo = divStart + imageSrc + 'dead.jpg' + divEnd;
-var questionTenImageThree = divStart + imageSrc + 'deadalive.jpg' + divEnd;
-var questionTenImageFour = divStart + imageSrc + 'cabin.jpg' + divEnd;
-var questionTenImages = questionTenImageOne + questionTenImageTwo + questionTenImageThree + questionTenImageFour;
+var questionTenImages = imageAdd('thing.jpg', true) + imageAdd('dead.jpg') + imageAdd('deadalive.jpg') + imageAdd('cabin.jpg');
 
 var questionTenAudio = $('#questionTenAudio');
 

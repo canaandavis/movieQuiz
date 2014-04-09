@@ -104,7 +104,7 @@ body {
 	font-size: 60px;
 }
 
-.instructions button {
+.instructions button, #start_over {
 	border: none;
 	height: 40px;
 	width: 100px;
@@ -114,11 +114,11 @@ body {
 	background-color: rgba(165, 31, 23, .7000);
 }
 
-.instructions button:hover {
+.instructions button:hover, #start_over:hover {
 	background-color: rgba(165, 31, 23, 1.000);
 }
 
-.instructions button:focus {
+.instructions button:focus, #start_over:focus {
 	outline: none;
 }
 
@@ -228,6 +228,7 @@ header {
 	margin-top: 100px;
 }
 
+
 .progress_indicator {
 	border-radius: 100%;
 	height: 55px;
@@ -236,16 +237,24 @@ header {
 	float: right;
 	margin-left: 40px;
 	border: 2px dashed #a51f17;
+	font-size: 63px;
+	line-height: 0px;
+	text-align: center;
+}
+
+.progress_indicator i {
+	margin-top: -3px;
 }
 
 .progress_correct {
-	background-color: #a51f17;
+	color: #a51f17;
 	border: none;
-}
+	}
 
 .progress_incorrect {
 	border: 2px solid #a51f17;
-	background-color: rgba(29, 31, 33, .8900);
+	color: rgba(29, 31, 33, .8900);
+	font-size: 60px;
 }
 
 /*Audio Controls*/
@@ -257,13 +266,25 @@ header {
 	text-align: right;
 	font-family: 'Oswald', sans-serif;
 	font-size: 30px;
-	padding-right: 30px;
+	padding-right: 35px;
 	color: white;
 }
 
 .audio_controls a{
 	text-decoration: none;
 	color: white;
+}
+
+#instructions_link {
+	margin-right: 580px;
+	font-size: 20px;
+}
+
+/* Bottom Instructions */
+#clickInstructions {
+	margin-right: 190px;
+	font-size: 20px;
+	margin-top: -50px;
 }
 
 /*Quiz Choices*/
@@ -285,6 +306,7 @@ img {
 	height: 350px;
 	width: 250px;
 }
+
 
 /*img:hover {
 	opacity: .8;
