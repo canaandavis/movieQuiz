@@ -37,6 +37,7 @@ body {
 	font-size: 35px;
 	padding-top: 175px;
 	display: none;
+	left: 0;
 }
 
 .endGame #header, .endGame #close {
