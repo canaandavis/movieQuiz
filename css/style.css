@@ -48,16 +48,12 @@ body {
 	font-size: 40px;
 }
 
-.endGame #stars {
-	font-size: 35px;
+.stars {
+	display: none;
 }
 
-.engGame #tagline {
-	font-size: 25px;
-}
-
-/* Final overlay */
-.final {
+/* End Round overlay */
+.end_round {
 	background-color: rgba(29, 31, 33, .9500);
 	height: 750px;
 	width: 1050px;
@@ -70,11 +66,11 @@ body {
 	left: 0;
 }
 
-.final #header, .endGame #header {
+.end_round #header, .endGame #header {
 	font-size: 60px;
 }
 
-.final button {
+.end_round button {
 	border: none;
 	height: 40px;
 	min-width: 100px;
@@ -84,13 +80,19 @@ body {
 	background-color: rgba(165, 31, 23, .7000);
 }
 
-.final button:hover {
+.end_round button:hover {
 	background-color: rgba(165, 31, 23, 1.000);
 }
 
-.final button:focus {
+.end_round button:focus {
 	outline: none;
 }
+
+.end_round_response {
+	display:none;
+}
+
+
 
 /*Instructions Overlay*/
 .instructions{

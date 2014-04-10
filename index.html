@@ -13,8 +13,8 @@
 </head>
 <body>
 	<div class="container">
-		<div class="instructions"> 
-		<span>WELCOME TO THE TOTALLY RAD MOVIE QUIZ</span><br>
+		<div class="instructions overlay"> 
+			<span>WELCOME TO THE TOTALLY RAD MOVIE QUIZ</span><br>
 			the quiz consist of 5 questions<br>
 			each question will play a short audio clip from a movie <br>
 			it is your job to guess which movie this clip is from<br>
@@ -23,19 +23,57 @@
 			<button id="get_started">Lets do it!</button>
 		</div>
 
-		<div class="endGame">
+		<div class="endGame overlay">
 			<span id="header"></span><br>
-			<span id="total"></span><br>
-			<span id="stars"></span><br>
-			<span id="tagLine"></span><br>
-			<span id="close">THANKS FOR PLAYING!</span><br>
+			<span id="five_stars" class="stars">
+				"<i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i>"<br>
+				Great Job! You did it, you really did it!
+			</span>
+
+			<span id="four_stars" class="stars">
+				"<i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i>"<br>
+				Well done, you know your stuff, dude
+			</span>
+
+			<span id="three_stars" class="stars">
+				"<i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i>"<br>
+				Good job, you should feel good about yourself
+			</span>
+
+			<span id="two_stars" class="stars">
+				"<i class='fa fa-star'></i><i class='fa fa-star'></i>"<br>
+				You did ok, just ok though
+			</span>
+
+			<span id="one_star" class="stars">
+				"<i class='fa fa-star'></i>"<br>
+				"Maybe you're just not a movie buff" - everyone
+			</span>
+
+			<span id="half_star" class="stars">
+				"<i class='fa fa-star-half'></i>"<br>
+				Lets just forget this happened
+			</span>
+			<br><span id="close">THANKS FOR PLAYING!</span><br>
 			<button id="start_over">Start Over</button>
 		</div>
 
-		<div class="final">
-			<span id="header"></span>
-			<p></p>
-			<button id="no_button">No Thanks</button> <button id="next_round">Play Another Round</button>
+		<div class="end_round overlay">
+			<span id="header"></span><br>
+			
+			<span class="end_round_response stars" id="good">
+				Well done.  Would you like to test your knowledge with some more films?
+			</span>
+			
+			<span class="end_round_response stars" id="ok">
+				Not too bad.  Lets try some more films.
+			</span>
+			
+			<span class="end_round_response stars" id="bad">
+				Maybe another set of films would suit you better.  Lets give it a try.
+			</span>
+
+			<br><button id="no_button">No Thanks</button> <button id="next_round">Play Another Round</button>
 		</div>
 
 		<div class="answer">
@@ -54,8 +92,107 @@
 					presence; he descends into madness and attempts to murder his wife and son.
 				</div>
 				<div class="description" id="questionTwoDescription">
-					Question two text
+					Brazil is a 1985 British film directed by Terry Gilliam and written
+					by Gilliam, Charles McKeown, and Tom Stoppard. British National Cinema by Sarah Street describes the
+					film as a 'fantasy/satire on bureaucratic society' while John Scalzi's Rough Guide to Sci-Fi Movies 
+					describes it as a 'dystopian satire'. The film stars Jonathan Pryce and features Robert De Niro, Kim 
+					Greist, Michael Palin, Katherine Helmond, Bob Hoskins, and Ian Holm.<br><br>
+					The film centres on Sam Lowry, 
+					a man trying to find a woman who appears in his dreams while he is working in a mind-numbing job and living a 
+					life in a small apartment, set in a consumer-driven dystopian world in which there is an over-reliance on poorly 
+					maintained (and rather whimsical) machines. Brazil's bureaucratic, totalitarian government is reminiscent of the 
+					government depicted in George Orwell's Nineteen Eighty-Four, except that it has a buffoonish, slapstick 
+					quality and lacks a Big Brother figure.
 				</div>
+				<div class="description" id="questionThreeDescription">
+					An imaginative Disney version of the Robin Hood legend.
+					Fun and romance abounds as the swashbuckling hero of Sherwood Forest, and his valiant
+					sidekick plot one daring adventure after another to outwit the greedy prince and his
+					partner as they put the tax squeeze on the poor.<br><br>
+					Prince John, an immature lion, rules England as heartlessly tyrannical regent for his
+					crusader brother John Lionheart. Robin Hood, Little John and Friar Tuck cleverly revolt
+					against over-taxation and general oppression by the sheriff of Nottingham and other royal
+					men. Robin wins the heart of royal ward Marian. Regular methods failing catch Robin, the king
+					organizes an archery tournament, which the country's best archer just can't resist.
+				</div>
+
+				<div class="description" id="questionFourDescription">
+					Scott Pilgrim (Michael Cera) is an unemployed 23-year-old bass guitarist 
+					in an up-and-coming garage rock band who is dating a cute 17-year-old high school girl, 
+					Knives Chau (Ellen Wong). He is having fun in life and rolling along at a nice even tempo 
+					until one day Ramona Flowers (Mary Elizabeth Winstead) roller-blades into his life. Ramona 
+					moved to Toronto from New York City to find peace and quiet and leave her past behind. 
+					No one knows what her past is, but Scott will find out very soon as he tries to make Ramona his 
+					new girlfriend.<br><br>
+					Before Scott can begin dating Ramona, he must prove himself by defeating the league 
+					of her seven exes who controls her love life. They will do anything to get rid of and destroy any new 
+					boyfriend Ramona may consider. If Scott wants to find true love with Ramona, he must defeat all seven, 
+					before the game is over.
+				</div>
+
+				<div class="description" id="questionFiveDescription">
+					Cameron Poe, who is a highly decorated United States Army Ranger came to his home of 
+					Alabama to his wife, Tricia. only to run into a few drunken regulars at where Tricia works. 
+					Cameron unknowingly kills one of the drunks and was sent to a federal penitentiary for 
+					involuntary manslaughter for seven years. Then, Cameron became eligible for parole and can now 
+					go home to his wife and daughter, Casey.<br><br> 
+					Unfortunately, Cameron has to share a prison airplane 
+					with some of the most dangerous criminals in the country, who somehow took control of the plane and 
+					are now planning to escape the country with the plane. Cameron has to find a way to stop them while 
+					playing along. Meanwhile, United States Marshal Vincent Larkin is trying to help Cameron get free and 
+					stop the criminals including, Cyrus 'The Virus' Grissom.
+				</div>
+
+				<div class="description" id="questionSixDescription">
+					Ghostbusters is a 1984 American supernatural comedy film directed and produced by 
+					Ivan Reitman and written by Dan Aykroyd and Harold Ramis. It stars Bill Murray, Aykroyd, and Ramis as three eccentric 
+					parapsychologists in New York City who start a ghost-catching business. Sigourney Weaver and Rick Moranis co-star as 
+					a potential client and her neighbor. The Ghostbusters business booms after initial skepticism, but when an uptown 
+					high-rise apartment building becomes the focal point of spirit activity linked to the ancient god Gozer, it 
+					threatens to overwhelm the team and the entire world.
+				</div>
+
+				<div class="description" id="questionSevenDescription">
+					The Life Aquatic with Steve Zissou is a 2004 American comedy-drama
+					film directed, co-written, and co-produced by Wes Anderson. It is Anderson's fourth feature
+					length film, released in the U.S. on Christmas 2004. It was written by Anderson and Noah Baumbach
+					and was filmed in and around Naples, Ponza, and the Italian Riviera
+					The film stars Bill Murray as the eponymous Zissou, an eccentric oceanographer who
+					sets out to exact revenge on the 'Jaguar shark' that ate his partner Esteban.
+					Zissou is both a parody of and homage to French diving pioneer Jacques-Yves Cousteau (1910–1997),
+					to whom the film is dedicated. Cate Blanchett, Willem Dafoe, Michael Gambon, Jeff Goldblum, Anjelica
+					Huston, Owen Wilson, Seu Jorge, and Bud Cort are also featured in the film.
+				</div>
+
+				<div class="description" id="questionEightDescription">
+					Jurassic Park is a 1993 American science fiction action film
+					that incorporates some horror elements as well. The film was directed by Steven Spielberg and is
+					the first installment of the Jurassic Park franchise. It is based on the 1990 novel of the same name
+					by Michael Crichton, with a screenplay written by Crichton and David Koepp. It stars Sam Neill, Laura Dern,
+					Jeff Goldblum, Richard Attenborough, Ariana Richards, Joseph Mazzello, Martin Ferrero, Wayne Knight,
+					Samuel L. Jackson and Bob Peck. The film centers on the fictional Isla Nublar, an islet located off
+					Costa Rica's Pacific Coast, where a billionaire philanthropist and a small team of genetic scientists
+					have created a wildlife park of cloned dinosaurs.
+				</div>
+
+				<div class="description" id="questionNineDescription">
+					Back to the Future is a 1985 American science fiction comedy film.
+					It was directed by Robert Zemeckis, written by Zemeckis and Bob Gale, produced by Steven Spielberg,
+					and stars Michael J. Fox, Christopher Lloyd, Lea Thompson, Crispin Glover and Thomas F. Wilson.
+					Fox plays Marty McFly, a teenager who is accidentally sent back in time to 1955. He meets his future
+					parents in high school and accidentally attracts his mother's romantic interest. Marty must repair the
+					damage to history by causing his parents-to-be to fall in love, and with the help of scientist
+					Dr. Emmett \"Doc\" Brown (Lloyd), he must find a way to return to 1985.
+				</div>
+
+				<div class="description" id="questionTenDescription">
+					The Thing (also known as John Carpenter's The Thing) is a 1982
+					American science fiction horror film directed by John Carpenter, written by Bill Lancaster, and
+					starring Kurt Russell. The film's title refers to its primary antagonist: a parasitic extraterrestrial
+					lifeform that assimilates other organisms and in turn imitates them. The Thing infiltrates an Antarctic
+					research station, taking the appearance of the researchers that it absorbs, and paranoia develops within the group.
+				</div>
+
 			</div>
 			<button id="next_question">Next Question</button>
 		</div>
@@ -67,10 +204,21 @@
 			</div>
 			<div class="progress">
 					<div class="progress_indicator" id="progress_5">
+						<i class="fa fa-check-circle" id="correct_circle"></i>
+						<i class="fa fa-times-circle" id="incorrect_circle"></i>
 					</div>
-					<div class="progress_indicator" id="progress_4"></div>
-					<div class="progress_indicator" id="progress_3"></div>
-					<div class="progress_indicator" id="progress_2"></div>
+					<div class="progress_indicator" id="progress_4">
+						<i class="fa fa-check-circle" id="correct_circle"></i>
+						<i class="fa fa-times-circle" id="incorrect_circle"></i>
+					</div>
+					<div class="progress_indicator" id="progress_3">
+						<i class="fa fa-check-circle" id="correct_circle"></i>
+						<i class="fa fa-times-circle" id="incorrect_circle"></i>
+					</div>
+					<div class="progress_indicator" id="progress_2">
+						<i class="fa fa-check-circle" id="correct_circle"></i>
+						<i class="fa fa-times-circle" id="incorrect_circle"></i>
+					</div>
 					<div class="progress_indicator" id="progress_1">
 						<i class="fa fa-check-circle" id="correct_circle"></i>
 						<i class="fa fa-times-circle" id="incorrect_circle"></i>
