@@ -4,7 +4,8 @@ $(document).ready(function(){
 });
 
 var question1 = new Question($('#questionOneAudio'),["shining.jpg", "alien.jpg", "halloween.jpg", "nightmare.jpg"], $('#questionOneDescription'), "0");
-var questions = [question1];
+var question2 = new Question($('#questionTwoAudio'), ["bladerunner.jpg", "brazil.jpg", "fifth.jpg", "starwars.jpg"], $('#questionTwoDescription'), "1");
+var questions = [question1, question2];
 var questionCount = 0;
 var clicked = false;
 
@@ -60,7 +61,7 @@ function correctCheck(){
 		}
 		changeOpacity();
 		progressUpdate(correct);
-		// correctAnswer(correct);
+		correctAnswer(correct);
 	});
 
 }
@@ -97,11 +98,44 @@ function progressUpdate(event){
 	}
 }
 
+// Function to load next question
+
+function nextQuestion(){
+	$('#next_question').on('click', function(){		
+		hideAnswerBox();
+		clearAnswerBox();
+		removePosters();
+		questionCount++
+		updateQuestion();
+	})
+}
+
+// Function to clear answer box
+
+function clearAnswerBox(){
+
+	$('.movie_info').find('.poster').empty();
+	$('.movie_info').find(questions[questionCount].descriptionText).hide();
+}
+
+// Function to hide answerbox
+
+function hideAnswerBox(){
+	$('.answer').fadeOut(100);
+}
+
+// Function to remove current movie posters
+
+function removePosters(){
+	$('.choices_container').empty();
+}
+
 // Function to update a question
 
 function updateQuestion(){
 	questions[questionCount].updateImages();
 	correctCheck();
 	imageHover(clicked);
+	nextQuestion();
 
 }
