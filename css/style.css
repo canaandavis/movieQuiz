@@ -48,16 +48,12 @@ body {
 	font-size: 40px;
 }
 
-.endGame #stars {
-	font-size: 35px;
+.stars {
+	display: none;
 }
 
-.engGame #tagline {
-	font-size: 25px;
-}
-
-/* Final overlay */
-.final {
+/* End Round overlay */
+.end_round {
 	background-color: rgba(29, 31, 33, .9500);
 	height: 750px;
 	width: 1050px;
@@ -70,11 +66,11 @@ body {
 	left: 0;
 }
 
-.final #header, .endGame #header {
+.end_round #header, .endGame #header {
 	font-size: 60px;
 }
 
-.final button {
+.end_round button {
 	border: none;
 	height: 40px;
 	min-width: 100px;
@@ -84,13 +80,19 @@ body {
 	background-color: rgba(165, 31, 23, .7000);
 }
 
-.final button:hover {
+.end_round button:hover {
 	background-color: rgba(165, 31, 23, 1.000);
 }
 
-.final button:focus {
+.end_round button:focus {
 	outline: none;
 }
+
+.end_round_response {
+	display:none;
+}
+
+
 
 /*Instructions Overlay*/
 .instructions{
@@ -103,7 +105,7 @@ body {
 	font-family: 'Oswald', sans-serif;
 	font-size: 35px;
 	padding-top: 175px;
-	/*display: none;*/
+	display: none;
 }
 
 
@@ -168,6 +170,8 @@ body {
 	width: 420px;
 	font-family: 'Merriweather', serif;
 	font-size: 15px;
+	display: none;
+	margin-bottom: 70px;
 }
 
 .answer button{
@@ -181,6 +185,9 @@ body {
 	margin-bottom: 20px;
 	clear: both;
 	height: 40px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 .answer button:hover{
@@ -261,8 +268,16 @@ header {
 .progress_incorrect {
 	border: 2px solid #a51f17;
 	color: rgba(29, 31, 33, .8900);
-	font-size: 60px;
+	font-size: 59px;
 	-moz-font-size: 63px;
+}
+
+.progress_incorrect i {
+	line-height: .9;
+}
+
+#correct_circle, #incorrect_circle {
+	display: none;
 }
 
 /*Audio Controls*/
