@@ -170,7 +170,7 @@ function Question(audio, posters, descriptionText, correct){
 		}
 		currentQuestion.descriptionText.show();
 		$('.poster').append(imageAdd(currentQuestion.posters[currentQuestion.correct], "answer_show"));
-		$('.answer').show();
+		$('.answer').fadeIn(500);
 	}
 
 // Functions for progress bar updates
@@ -210,15 +210,15 @@ function Question(audio, posters, descriptionText, correct){
 	// Function to clear answer box
 
 	function clearAnswerBox(){
-
 		$('.movie_info').find('.poster').empty();
-		$('.movie_info').find(questions[questionCount].descriptionText).hide();
+		$('.movie_info').find(questions[questionCount].descriptionText).fadeOut(500);
 	}
 
 	// Function to hide answerbox
 
 	function hideAnswerBox(){
-		$('.answer').fadeOut(100);
+		$('.answer').fadeOut(500);
+		clearAnswerBox();
 	}
 
 	// Function to remove current movie posters
@@ -241,7 +241,6 @@ function Question(audio, posters, descriptionText, correct){
 
 	function nextQuestion(){	
 		hideAnswerBox();
-		clearAnswerBox();
 		removePosters();
 		stopAudio();
 		questionCount++;
