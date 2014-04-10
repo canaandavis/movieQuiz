@@ -103,7 +103,7 @@ body {
 	font-family: 'Oswald', sans-serif;
 	font-size: 35px;
 	padding-top: 175px;
-	/*display: none;*/
+	display: none;
 }
 
 
@@ -168,6 +168,7 @@ body {
 	width: 420px;
 	font-family: 'Merriweather', serif;
 	font-size: 15px;
+	display: none;
 }
 
 .answer button{
@@ -261,8 +262,16 @@ header {
 .progress_incorrect {
 	border: 2px solid #a51f17;
 	color: rgba(29, 31, 33, .8900);
-	font-size: 60px;
+	font-size: 59px;
 	-moz-font-size: 63px;
+}
+
+.progress_incorrect i {
+	line-height: .9;
+}
+
+#correct_circle, #incorrect_circle {
+	display: none;
 }
 
 /*Audio Controls*/
